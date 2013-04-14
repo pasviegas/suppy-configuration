@@ -1,4 +1,4 @@
-package org.pav.suppy.configuration;
+package br.org.pav.suppy.configuration;
 
 import java.net.UnknownHostException;
 
@@ -9,7 +9,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import com.mongodb.Mongo;
-import com.mongodb.MongoException;
 
 @Configuration
 @PropertySource("classpath:production-mongo.properties")
@@ -21,16 +20,16 @@ public class MongoConfig {
 	@Value("${mongo.host.port}")
 	private Integer port;
 	
-	@Value("${mongo.host.name}")
+	@Value("${mongo.db.name}")
 	private String name;
 	
 	@Bean
-	public Mongo mongo() throws UnknownHostException, MongoException {
+	public Mongo mongo() throws UnknownHostException {
 		return new Mongo(host, port);
 	}
 	
 	@Bean
-	public MongoTemplate mongoTemplate() throws UnknownHostException, MongoException {
+	public MongoTemplate mongoTemplate() throws UnknownHostException {
 		return new MongoTemplate(mongo(), name);
 	}
 	

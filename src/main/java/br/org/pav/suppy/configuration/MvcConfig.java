@@ -1,7 +1,8 @@
-package org.pav.suppy.configuration;
+package br.org.pav.suppy.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -13,6 +14,11 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
+	@Override
+	public void configureContentNegotiation( ContentNegotiationConfigurer configurer) {
+		configurer.favorPathExtension(true);
+	}
+	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
